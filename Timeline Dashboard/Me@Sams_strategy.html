@@ -80,8 +80,7 @@ nav.site-nav a:hover, nav.site-nav a:focus-visible { color:var(--text); outline:
 nav.site-nav a.active { color:var(--sc-blue-primary); font-weight:700; }
 nav.site-nav a.active::after { transform:scaleX(1); }
 /* AES logo styling */
-.home-logo { width:130px; max-width:22vw; height:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.25)); pointer-events:none; margin-left:0; flex:0 0 auto; }
-@media (max-width:640px){ .home-logo{ width:90px; } }
+/* .home-logo removed per request */
 
 /* Home (Cover) View Styles */
 .home-main { max-width:1600px; margin:0 auto 4rem; padding:0 clamp(1rem,3vw,2rem); }
@@ -120,6 +119,13 @@ nav.site-nav a.active::after { transform:scaleX(1); }
 .home-cta-row .home-btn:hover::after, .home-cta-row .home-btn:focus-visible::after { transform:translateX(0); }
 .home-cta-row .home-btn:hover, .home-cta-row .home-btn:focus-visible { background:linear-gradient(140deg,var(--sc-royal),var(--sc-blue-primary)); border-color:var(--sc-royal); outline:none; transform:translateY(-2px); box-shadow:0 6px 16px -6px rgba(0,53,142,.45),0 0 0 1px rgba(255,255,255,.4) inset; }
 .home-cta-row .home-btn:active { transform:translateY(0); }
+/* Reduced motion: eliminate non-essential animations */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition:none !important; }
+  .home-title, .home-title::after, .home-rotator::after, .home-hero::before { animation:none !important; }
+}
+/* Focus ring utility for improved visibility */
+.focus-ring:focus-visible { outline:3px solid var(--sc-cyan); outline-offset:3px; }
 .home-cta-row .home-btn:focus-visible { box-shadow:0 0 0 3px var(--hero-btn-focus-ring),0 4px 14px -4px rgba(0,0,0,.35); }
 
 /* Removed .home-pill-cloud styling (pill tags) per request */
@@ -140,6 +146,7 @@ nav.site-nav a.active::after { transform:scaleX(1); }
 /* Strategy snapshot */
 .strategy-snippet { max-width:1680px; margin:0 auto .75rem; padding:0 clamp(1rem,3vw,2rem); }
 .strategy-snippet-inner { background:#ffffff; border:1px solid #a9bfce; border-radius:8px; padding:.8rem 1rem .95rem; box-shadow:0 2px 6px -2px rgba(10,40,70,.12),0 1px 2px rgba(10,40,70,.08); position:relative; }
+.strategy-snippet-inner { z-index:10; }
 .strategy-snippet button.toggle { appearance:none; background:var(--primary); border:1px solid var(--primary-accent); color:#fff; font-size:.6rem; font-weight:600; letter-spacing:.55px; padding:.4rem .7rem; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:.4rem; box-shadow:var(--shadow-sm); }
 .strategy-snippet button.toggle:hover { background:var(--primary-accent); }
 .strategy-snippet h3 { margin:.55rem 0 .4rem; font-size:.68rem; letter-spacing:.55px; text-transform:uppercase; font-weight:700; color:var(--text); }
@@ -223,9 +230,7 @@ main { max-width: 1680px; margin:0 auto 4rem; padding:0 clamp(1rem,3vw,2rem); }
 /* Removed filter-indicator chip per request */
 
 footer { padding:2rem 1rem 3rem; text-align:center; font-size:.6rem; color:var(--text-light); }
-/* Corner badge */
-.corner-badge { position:fixed; bottom:14px; right:14px; width:64px; max-width:22vw; height:auto; z-index:4000; opacity:.9; transition:.25s transform,.25s opacity; pointer-events:auto; }
-.corner-badge:hover, .corner-badge:focus-visible { transform:scale(1.06); opacity:1; }
+/* Corner badge removed per request */
 
 .empty { padding:3rem 1rem; text-align:center; font-size:.8rem; font-weight:500; color:var(--text-light); }
 
@@ -298,7 +303,10 @@ body { background:#ffffff !important; color:var(--text); }
 .strategy-title::after { content:""; position:absolute; left:0; bottom:0; width:100%; height:5px; background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan),var(--sc-pale-cyan)); border-radius:3px; box-shadow:0 2px 6px -2px rgba(0,103,160,.45); }
 
 /* Strategy cards accent */
-.strat-grid .strat-card { background:#ffffff; border:1px solid var(--border); border-radius:14px; padding:.85rem .95rem .9rem; position:relative; box-shadow:0 4px 14px -6px rgba(0,53,142,.25),0 1px 3px rgba(0,53,142,.18); display:flex; flex-direction:column; gap:.5rem; }
+.strat-grid { display:grid; gap:1.3rem 1.6rem; }
+@media (min-width:900px){ .strat-grid.cols-3{ grid-template-columns:repeat(3,1fr); } }
+.strat-grid .strat-card { background:#ffffff; border:1px solid var(--border); border-radius:14px; padding:1rem 1.15rem 1.15rem; position:relative; box-shadow:0 6px 20px -10px rgba(0,53,142,.25),0 2px 6px -2px rgba(0,53,142,.15); display:flex; flex-direction:column; gap:.55rem; }
+@media (max-width:760px){ .strat-grid { gap:1rem 1.1rem; } .strat-grid .strat-card{ padding:.9rem 1rem 1rem; } }
 .strat-grid .strat-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:linear-gradient(180deg,var(--sc-blue-primary),var(--sc-cyan)); border-top-left-radius:14px; border-bottom-left-radius:14px; }
 .strat-grid .strat-card h3 { margin:0; font-size:.78rem; letter-spacing:.65px; text-transform:uppercase; font-weight:700; color:var(--sc-navy-1); }
 .strat-grid .strat-card p { margin:0; font-size:.6rem; line-height:1.4; color:var(--text-light); }
@@ -389,6 +397,64 @@ nav.site-nav a:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(0,175,215
 .matrix .axis-effort-low { left:4px; top:50%; transform:translateY(-50%) rotate(-90deg); transform-origin:center; }
 .matrix .axis-effort-high { right:4px; top:50%; transform:translateY(-50%) rotate(90deg); transform-origin:center; }
 
+/* Personas View Styles */
+.personas-main { max-width:1400px; margin:0 auto 4rem; padding:0 clamp(1rem,3vw,2rem); }
+.personas-title { font-size:clamp(1.6rem,3.4vw,2.3rem); line-height:1.1; font-weight:700; letter-spacing:-.4px; background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; margin:0 0 .75rem; }
+.personas-lead { font-size:.82rem; line-height:1.45; max-width:980px; color:var(--text-light); margin:.2rem 0 1.4rem; font-weight:500; }
+.persona-grid { display:grid; gap:1.2rem 1.4rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); align-items:stretch; }
+.persona-card { background:linear-gradient(140deg,#ffffff,#f5fbff); border:1px solid var(--border); border-radius:16px; padding:.95rem 1rem 1.05rem; display:flex; flex-direction:column; gap:.65rem; position:relative; box-shadow:0 4px 16px -6px rgba(0,53,142,.18),0 2px 6px -2px rgba(0,53,142,.12); overflow:hidden; }
+.persona-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 18%,rgba(0,175,215,.20),transparent 70%); pointer-events:none; opacity:.55; }
+.persona-card h3 { margin:0; font-size:.9rem; letter-spacing:.6px; font-weight:700; text-transform:uppercase; background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.persona-tags { list-style:none; margin:.15rem 0 .2rem; padding:0; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+.persona-tags li { background:linear-gradient(135deg,rgba(0,103,160,.14),rgba(0,175,215,.22)); color:var(--sc-navy-2); padding:.38rem .6rem .42rem; font-size:.52rem; font-weight:600; letter-spacing:.45px; border-radius:999px; border:1px solid rgba(0,103,160,.35); box-shadow:0 2px 6px -3px rgba(0,53,142,.2); }
+.persona-tags li:hover { background:linear-gradient(135deg,rgba(0,103,160,.22),rgba(0,175,215,.28)); }
+.persona-sec h4 { margin:0 0 .3rem; font-size:.58rem; letter-spacing:.5px; font-weight:700; text-transform:uppercase; color:var(--text); }
+.persona-sec ul { margin:0; padding:0 0 0 1rem; font-size:.58rem; line-height:1.4; display:grid; gap:.3rem; }
+.persona-sec ul li { margin:0; }
+.persona-method { margin:2rem 0 0; background:linear-gradient(140deg,#ffffff,#f5fbff); border:1px solid var(--border); border-radius:16px; padding:1rem 1.1rem 1.1rem; box-shadow:0 4px 16px -6px rgba(0,53,142,.18),0 2px 6px -2px rgba(0,53,142,.12); }
+.persona-method h3 { margin:0 0 .55rem; font-size:.74rem; letter-spacing:.55px; font-weight:700; text-transform:uppercase; color:var(--text); }
+.persona-method ul { margin:.2rem 0 0; padding:0 0 0 1.15rem; font-size:.6rem; line-height:1.42; display:grid; gap:.35rem; }
+@media (max-width:780px){
+  .persona-card { padding:.85rem .85rem .95rem; }
+  .persona-card h3 { font-size:.82rem; }
+  .persona-tags li { font-size:.5rem; }
+  .personas-lead { font-size:.75rem; }
+  .persona-sec h4 { font-size:.56rem; }
+  .persona-sec ul { font-size:.55rem; }
+}
+/* Carousel specific */
+.persona-carousel { display:flex; flex-direction:column; gap:1rem; max-width:100%; }
+.persona-track { position:relative; overflow:hidden; width:100%; height:auto; }
+.persona-track-inner { 
+  display:flex; 
+  transition:transform .45s cubic-bezier(.4,.25,.2,1); 
+  will-change:transform;
+}
+.persona-track-inner .persona-card { 
+  box-sizing:border-box;
+}
+/* Grid layout override for evenly spaced persona boxes */
+.persona-track-inner[data-layout="grid"] {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.1rem 1.2rem;
+  transform:none !important;
+  width:100% !important;
+}
+.persona-track-inner[data-layout="grid"] .persona-card {
+  width:auto !important;
+  flex:unset !important;
+}
+.persona-controls { display:flex; align-items:center; justify-content:center; gap:1.2rem; margin-top:.25rem; }
+.persona-nav { background:var(--primary); color:#fff; border:1px solid var(--primary-accent); padding:.55rem .75rem; font-size:.7rem; font-weight:600; letter-spacing:.55px; border-radius:10px; cursor:pointer; box-shadow:0 2px 6px -2px rgba(0,53,142,.35); min-width:50px; transition:.25s background, .25s opacity; }
+.persona-nav[disabled] { opacity:.45; cursor:not-allowed; }
+.persona-nav:hover:not([disabled]), .persona-nav:focus-visible:not([disabled]) { background:var(--primary-accent); outline:none; }
+.persona-dots { display:flex; gap:.5rem; align-items:center; }
+.persona-dots button { width:12px; height:12px; border-radius:50%; background:var(--border); border:none; padding:0; cursor:pointer; position:relative; box-shadow:0 0 0 1px rgba(0,0,0,.15); }
+.persona-dots button[aria-selected="true"] { background:linear-gradient(135deg,var(--sc-blue-primary),var(--sc-cyan)); box-shadow:0 0 0 2px rgba(255,255,255,.85),0 0 0 4px rgba(0,103,160,.35); }
+.persona-dots button:focus-visible { outline:none; box-shadow:0 0 0 2px var(--hero-btn-focus-ring); }
+@media (prefers-reduced-motion: reduce){ .persona-track-inner { transition:none; } }
+
 /* Radar weight profile */
 .prio-radar-block { background:#ffffff; border:1px solid var(--border); border-radius:16px; padding:.95rem 1rem 1rem; box-shadow:0 4px 16px -6px rgba(0,53,142,.22),0 1px 3px rgba(0,53,142,.12); display:flex; flex-direction:column; gap:.6rem; }
 .radar { width:100%; aspect-ratio:1 / 1; position:relative; }
@@ -469,13 +535,14 @@ nav.site-nav a:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(0,175,215
       <a href="#strategy" data-view="strategy" aria-controls="view-strategy">Strategy</a>
       <a href="#change" data-view="change" aria-controls="view-change">Change Mgmt</a>
       <a href="#roadmap" data-view="roadmap" aria-controls="view-roadmap">Roadmap</a>
+      <a href="#personas" data-view="personas" aria-controls="view-personas">Personas</a>
     </nav>
-    <img class="home-logo" src="c:/Users/tdavi38/Pictures/AES%20Logo.png" alt="AES Turning Your Voice Into Action seal" loading="lazy" />
+  <!-- Top-right logo removed per request -->
     <div class="filter-indicator" id="filterIndicator" hidden></div>
   </header>
   <!-- NEW: Home (Cover) View -->
-  <div id="view-home" class="app-view" data-view="home" role="region" aria-labelledby="homeHeroHeading">
-    <main class="home-main" id="mainContent" tabindex="-1">
+  <div id="view-home" class="app-view" data-view="home" aria-labelledby="homeHeroHeading">
+    <main class="home-main" id="siteMain" tabindex="-1" role="main">
       <section class="home-hero" aria-labelledby="homeHeroHeading">
         <div id="starfield" aria-hidden="true"></div>
         <div class="home-bg-orb orb-a" aria-hidden="true"></div>
@@ -491,7 +558,7 @@ nav.site-nav a:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(0,175,215
   <footer class="home-footer">Cover • Inspire, orient, then dive deeper.</footer>
     </main>
   </div>
-  <div id="view-roadmap" class="app-view" data-view="roadmap" role="region" aria-label="Roadmap data view">
+  <div id="view-roadmap" class="app-view" data-view="roadmap" aria-label="Roadmap data view">
   <div class="strategy-snippet collapsed" id="strategySnippet">
     <div class="strategy-snippet-inner">
   <button class="toggle btn btn-outline" id="strategyToggle" aria-expanded="false" aria-controls="strategyList">Show Strategy Snapshot</button>
@@ -511,7 +578,7 @@ nav.site-nav a:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(0,175,215
     </div>
   </div>
   <main id="roadmap">
-  <section class="panel" aria-labelledby="controlsHeading" role="region">
+  <section class="panel" aria-labelledby="controlsHeading">
       <h2 id="controlsHeading" class="visually-hidden" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Controls</h2>
       <div class="controls" role="toolbar" aria-label="Roadmap controls">
         <div class="control">
@@ -552,7 +619,7 @@ nav.site-nav a:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(0,175,215
       <div class="legend" id="legend"></div>
     </section>
 
-    <section class="panel" id="vizPanel" aria-live="polite" role="region" aria-label="Visualization and executive summary">
+  <section class="panel" id="vizPanel" aria-live="polite" aria-label="Visualization and executive summary">
       <div id="execSummary" class="exec-summary" hidden aria-live="polite" aria-atomic="true"></div>
       <div id="vizRoot"></div>
     </section>
@@ -838,6 +905,69 @@ These truths help us design AI that works with human psychology, not against it.
     </footer>
   </div>
 
+  <!-- Personas View -->
+  <div id="view-personas" class="app-view" data-view="personas" hidden>
+    <main class="personas-main">
+      <section class="panel" style="margin-top:0;">
+        <h2 style="margin-top:0;" class="personas-title">Associate Personas</h2>
+        <p class="personas-lead">Core end-user archetypes guiding AI strategy and adoption enablement. Each persona distills distinct workflows, motivations, friction points, and success indicators. Use these to validate problem statements, prioritize capabilities, and craft value narratives.</p>
+        <div class="persona-carousel" id="personaCarousel" aria-label="Primary associate personas" role="group">
+          <div class="persona-track" id="personaTrack" role="list">
+            <div class="persona-track-inner" id="personaTrackInner" data-layout="grid" role="list">
+          <article class="persona-card" aria-labelledby="p-frontline" data-index="0" role="listitem">
+            <h3 id="p-frontline">Frontline Hourly Associate</h3>
+            <ul class="persona-tags"><li>Time-Constrained</li><li>Task Switching</li><li>Mobile First</li></ul>
+            <div class="persona-sec"><h4>Primary Goals</h4><ul><li>Quick task completion with minimal navigation.</li><li>Confidence in schedule, pay, and compliance flows.</li><li>Clear prompts vs. searching for the right screen.</li></ul></div>
+            <div class="persona-sec"><h4>Friction</h4><ul><li>Too many tool entry points.</li><li>Inconsistent terminology across flows.</li><li>Low discoverability of new helpful features.</li></ul></div>
+            <div class="persona-sec"><h4>KPIs</h4><ul><li>Repeat usage of guided tasks.</li><li>Decline in abandon rates.</li><li>Time-to-complete benchmark improvement.</li></ul></div>
+          </article>
+          <article class="persona-card" aria-labelledby="p-clubmgr" data-index="1" role="listitem">
+            <h3 id="p-clubmgr">Club / Department Manager</h3>
+            <ul class="persona-tags"><li>Decision Load</li><li>People Leadership</li><li>Shift Planning</li></ul>
+            <div class="persona-sec"><h4>Primary Goals</h4><ul><li>Staffing & labor optimization.</li><li>Performance & coaching clarity.</li><li>Risk & compliance visibility.</li></ul></div>
+            <div class="persona-sec"><h4>Friction</h4><ul><li>Fragmented data across tools.</li><li>Manual consolidation for planning.</li><li>Reactive vs. proactive alerts.</li></ul></div>
+            <div class="persona-sec"><h4>KPIs</h4><ul><li>Time saved in weekly planning.</li><li>Increase in coaching completion.</li><li>Reduction in compliance exception response time.</li></ul></div>
+          </article>
+          <article class="persona-card" aria-labelledby="p-peoplepartner" data-index="2" role="listitem">
+            <h3 id="p-peoplepartner">People Partner</h3>
+            <ul class="persona-tags"><li>Enablement</li><li>Cross-Functional</li><li>Risk Mitigation</li></ul>
+            <div class="persona-sec"><h4>Primary Goals</h4><ul><li>Drive adoption & localization of new capabilities.</li><li>Monitor sentiment & retention risk signals.</li><li>Advise leaders on workforce readiness.</li></ul></div>
+            <div class="persona-sec"><h4>Friction</h4><ul><li>Lagging visibility into usage signals.</li><li>Manual story collection from field.</li><li>Difficulty quantifying enablement impact.</li></ul></div>
+            <div class="persona-sec"><h4>KPIs</h4><ul><li>Adoption acceleration curve.</li><li>Retention / risk score movement.</li><li>Localization coverage & timeliness.</li></ul></div>
+          </article>
+          <article class="persona-card" aria-labelledby="p-exec" data-index="3" role="listitem">
+            <h3 id="p-exec">Executive Stakeholder</h3>
+            <ul class="persona-tags"><li>Portfolio Oversight</li><li>Value Story</li><li>Investment Tradeoffs</li></ul>
+            <div class="persona-sec"><h4>Primary Goals</h4><ul><li>Clarity on strategic bets vs. quick wins.</li><li>Evidence of associate impact & productivity lift.</li><li>Risk & dependency surfacing early.</li></ul></div>
+            <div class="persona-sec"><h4>Friction</h4><ul><li>Overly tactical dashboards.</li><li>Hard to connect usage to outcomes.</li><li>Delayed insight into adoption stalls.</li></ul></div>
+            <div class="persona-sec"><h4>KPIs</h4><ul><li>Time-to-decision reduction.</li><li>Strategic initiative ROI proxy (usage × outcome).</li><li>Early detection of adoption plateau.</li></ul></div>
+          </article>
+          <article class="persona-card" aria-labelledby="p-champion" data-index="4" role="listitem">
+            <h3 id="p-champion">Local Champion / Advocate</h3>
+            <ul class="persona-tags"><li>Peer Influence</li><li>Early Adopter</li><li>Localization</li></ul>
+            <div class="persona-sec"><h4>Primary Goals</h4><ul><li>Show peers value of new tools.</li><li>Surface localized friction fast.</li><li>Share success stories & tips.</li></ul></div>
+            <div class="persona-sec"><h4>Friction</h4><ul><li>Limited recognition & feedback loop.</li><li>Manual story submission process.</li><li>Lack of quick reference enablement collateral.</li></ul></div>
+            <div class="persona-sec"><h4>KPIs</h4><ul><li>Champion story volume & engagement.</li><li>Localization issue turnaround time.</li><li>Peer activation uplift in champion-led clubs.</li></ul></div>
+          </article>
+            </div>
+          </div>
+          <!-- Removed persona-dots navigation: all personas shown concurrently -->
+        </div>
+        <div class="persona-method" aria-label="Persona application guidance">
+          <h3>Using Personas in AI Strategy</h3>
+          <ul>
+            <li>Prioritize backlog items that address multi-persona friction clusters (e.g., navigation simplicity helps frontline + champion + manager).</li>
+            <li>Ensure each capability PRD lists primary and secondary personas with measurable outcome hypotheses.</li>
+            <li>Map enablement assets to persona-specific motivators (confidence, time-saved, risk visibility).</li>
+            <li>Instrument adoption dashboards with persona segmentation where feasible.</li>
+            <li>Validate experimental AI agent behaviors against persona trust & transparency expectations.</li>
+          </ul>
+        </div>
+      </section>
+      <footer>Personas • Anchor experience design & adoption narratives</footer>
+    </main>
+  </div>
+
   <div class="tooltip" id="tooltip" role="dialog" aria-hidden="true"></div>
 <script>
 // Append Change Mgmt + Strategy view styles (lean) & view switcher
@@ -845,17 +975,43 @@ These truths help us design AI that works with human psychology, not against it.
   const style = document.createElement('style');
   style.textContent = `.app-view{animation:fadeIn .25s ease;} @keyframes fadeIn{from{opacity:0}to{opacity:1}} nav.site-nav a.active{background:transparent;color:var(--sc-blue-primary);border:none;position:relative;} nav.site-nav a.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan));border-radius:2px;transform:scaleX(1);} #starfield{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:10;pointer-events:none;} .star{position:absolute;background:#ffffff;border-radius:50%;opacity:0.9;animation:twinkle 3s infinite;box-shadow:0 0 4px rgba(255,255,255,0.8);} .shooting-star{position:absolute;background:linear-gradient(45deg,#ffffff,rgba(255,255,255,0.3),transparent);border-radius:2px;opacity:0;animation:shoot 2s linear;box-shadow:0 0 6px rgba(255,255,255,0.6);} @keyframes twinkle{0%,100%{opacity:0.3;transform:scale(0.8);} 50%{opacity:1;transform:scale(1.2);}} @keyframes shoot{0%{opacity:1;transform:translateX(-100px) translateY(50px);} 100%{opacity:0;transform:translateX(300px) translateY(-150px);}} @media (prefers-reduced-motion:reduce){.star,.shooting-star{animation:none!important;opacity:0.5!important;}} #top{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--panel-bg) 0%,rgba(255,255,255,.92) 100%);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:.35rem .85rem .55rem;display:block;} nav.site-nav{position:absolute;top:.55rem;right:4.85rem;display:flex;flex-wrap:wrap;gap:.45rem;margin:0;} #siteTitle{margin:.2rem 0 0;font-size:clamp(1rem,2vw,1.4rem);font-weight:700;letter-spacing:.2px;padding-right:15rem;} .home-logo{position:absolute;top:.48rem;right:.85rem;height:44px;width:auto;z-index:1300;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));} .whitepaper-content{padding-top:1rem;position:relative;z-index:1000;} .whitepaper-content h1,.whitepaper-content h2,.whitepaper-content h3{scroll-margin-top:80px;} #view-whitepaper p[style*="font-size:.75rem"][style*="text-transform:uppercase"]{display:none!important;} @media (max-width:760px){ nav.site-nav{position:static;justify-content:center;margin:.5rem 0 .2rem;} #siteTitle{padding-right:0;text-align:center;} .home-logo{position:static;margin:.25rem auto .4rem;display:block;height:40px;} .whitepaper-content{padding-top:1rem;position:relative;z-index:1000;} .whitepaper-content h1,.whitepaper-content h2,.whitepaper-content h3{scroll-margin-top:70px;} } .insight-term{position:relative;cursor:help;color:var(--sc-blue-primary);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:all 0.2s ease;} .insight-term:hover{color:var(--sc-royal);text-decoration-style:solid;} .insight-term::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--sc-blue-primary),var(--sc-royal));color:white;padding:12px 16px;border-radius:8px;font-size:0.85rem;font-weight:500;line-height:1.4;white-space:pre-line;width:320px;max-width:90vw;box-shadow:0 4px 20px rgba(0,0,0,0.25);opacity:0;visibility:hidden;transition:all 0.3s ease;z-index:2000;pointer-events:none;} .insight-term::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--sc-royal);opacity:0;visibility:hidden;transition:all 0.3s ease;z-index:2001;} .insight-term:hover::after,.insight-term:hover::before{opacity:1;visibility:visible;} @media (max-width:600px){.insight-term::after{width:280px;font-size:0.8rem;padding:10px 14px;}} .cm-main{max-width:1180px;margin:0 auto 4rem;padding:0 clamp(1rem,3vw,2rem);} .cm-grid{display:grid;gap:1rem;} @media (min-width:860px){ .cm-grid.cols-3{grid-template-columns:repeat(3,1fr);} .cm-grid.cols-2{grid-template-columns:repeat(2,1fr);} } .cm-card{background:linear-gradient(150deg,#ffffff,#f5fbff);border:1px solid var(--border);padding:.85rem .9rem .9rem;border-radius:12px;display:flex;flex-direction:column;gap:.55rem;box-shadow:0 4px 14px -6px rgba(0,53,142,.25),0 1px 3px rgba(0,53,142,.18);position:relative;overflow:hidden;} .cm-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 15%,rgba(0,175,215,.18),transparent 70%);opacity:.6;pointer-events:none;} .cm-card h3{margin:0;font-size:.72rem;letter-spacing:.6px;text-transform:uppercase;font-weight:700;background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan));-webkit-background-clip:text;background-clip:text;color:transparent;} .cm-card p{margin:0;font-size:.6rem;line-height:1.4;color:var(--text-light);} .cm-matrix{width:100%;border-collapse:collapse;font-size:.58rem;background:#ffffff;border:1px solid var(--border);box-shadow:0 2px 8px -4px rgba(0,53,142,.18);} .cm-matrix th,.cm-matrix td{border:1px solid var(--border);padding:.45rem .55rem;text-align:left;vertical-align:top;} .cm-matrix th{background:linear-gradient(90deg,var(--sc-blue-primary),var(--sc-cyan));color:#fff;font-weight:700;letter-spacing:.55px;text-transform:uppercase;} .cm-matrix td{background:#f9fcfe;} .two-col{display:grid;gap:1.05rem;} @media(min-width:900px){.two-col{grid-template-columns:1fr 1fr;}} .cm-inline{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem .6rem;} .cm-inline li{background:linear-gradient(135deg,rgba(0,103,160,.14),rgba(0,175,215,.18));color:var(--sc-navy-2);padding:.38rem .65rem .42rem;font-size:.52rem;font-weight:600;border-radius:999px;letter-spacing:.45px;border:1px solid rgba(0,103,160,.35);box-shadow:0 2px 6px -3px rgba(0,53,142,.2);} .cm-inline li:hover{background:linear-gradient(135deg,rgba(0,103,160,.22),rgba(0,175,215,.25));} .cm-timeline{list-style:none;margin:.6rem 0 0;padding:0;display:grid;gap:.55rem;position:relative;} .cm-timeline li{display:flex;gap:.75rem;align-items:flex-start;position:relative;padding:0 .25rem;} .cm-timeline .cadence-point{width:16px;flex:0 0 16px;position:relative;display:flex;justify-content:center;} .cadence-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--sc-blue-primary),var(--sc-cyan));box-shadow:0 0 0 3px #ffffff,0 0 0 5px rgba(0,103,160,.25);} .cm-timeline li:hover .cadence-dot{box-shadow:0 0 0 3px #ffffff,0 0 0 6px rgba(0,175,215,.35);} .cm-timeline .cadence-line{position:absolute;top:14px;bottom:-8px;width:2px;background:linear-gradient(180deg,var(--sc-blue-primary),var(--sc-cyan));opacity:.4;border-radius:2px;} .cm-timeline li:last-child .cadence-line{display:none;} .cadence-content strong{font-size:.65rem;letter-spacing:.42px;color:var(--sc-navy-2);font-weight:600;display:block;margin:.08rem 0 .18rem;} .cadence-content p{margin:0;font-size:.56rem;line-height:1.4;color:var(--text-light);} .cm-mini{font-size:.6rem;opacity:.78;color:var(--sc-navy-2);} .strategy-main{max-width:1300px;margin:0 auto 4rem;padding:0 clamp(1rem,3vw,2rem);} .strat-lead{font-size:.78rem;font-weight:500;letter-spacing:.3px;margin:.35rem 0 .2rem;color:var(--text-light);} .strat-bullets{margin:.55rem 0 0; padding:0 0 0 1.1rem; font-size:.62rem; line-height:1.4; display:grid; gap:.35rem;} .strat-bullets.tight{gap:.25rem;} `;
   document.head.appendChild(style);
+  // Keyboard arrow navigation for primary site nav
+  const primaryNav = document.querySelector('nav.site-nav');
+  if(primaryNav){
+    const links = Array.from(primaryNav.querySelectorAll('a[data-view]'));
+    links.forEach(link => {
+      link.addEventListener('keydown', e => {
+        if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+          e.preventDefault();
+          const idx = links.indexOf(link);
+          const dir = e.key === 'ArrowRight' ? 1 : -1;
+          let next = (idx + dir + links.length) % links.length;
+          links[next].focus();
+        }
+      });
+    });
+  }
   const links = document.querySelectorAll('nav.site-nav a[data-view]');
   const views = document.querySelectorAll('.app-view');
   function show(view){
     views.forEach(v=> v.hidden = v.dataset.view!==view);
     links.forEach(a=> a.classList.toggle('active', a.dataset.view===view));
-    if(view==='roadmap'){ const tt=document.getElementById('tooltip'); if(tt){ tt.classList.remove('visible'); tt.setAttribute('aria-hidden','true'); } }
+    if(typeof state==='object'){ state.view = view; }
+    if(view==='roadmap' || view==='quarterly'){
+      const tt=document.getElementById('tooltip'); if(tt){ tt.classList.remove('visible'); tt.setAttribute('aria-hidden','true'); }
+      if(typeof render==='function') render();
+    }
+    if(view==='personas'){ /* static grid: no init */ }
   }
   links.forEach(a=> a.addEventListener('click', e=>{ e.preventDefault(); const v=a.dataset.view; history.replaceState(null,'','#'+v); show(v); }));
   document.querySelectorAll('[data-view-link]').forEach(el=> el.addEventListener('click', e=>{ const v=el.getAttribute('data-view-link'); history.replaceState(null,'','#'+v); show(v); }));
   const initial = (location.hash||'').replace('#','');
-  if(initial && ['home','roadmap','change','strategy','whitepaper'].includes(initial)) { show(initial); } else show('home');
+  if(initial && ['home','roadmap','change','strategy','whitepaper','personas'].includes(initial)) {
+    show(initial);
+  } else {
+    show('roadmap');
+    history.replaceState(null,'','#roadmap');
+  }
 })();
 </script>
 <script>
@@ -1566,17 +1722,30 @@ function initHeroBackground(){
   const snippet = document.getElementById('strategySnippet');
   const hint = document.getElementById('strategyHint');
   if(toggle){
-    toggle.addEventListener('click', ()=>{
-      const content = snippet.querySelector('.snippet-content');
-      const collapsed = snippet.classList.toggle('collapsed');
-      if(content){
-        if(collapsed){ content.style.display='none'; content.setAttribute('aria-hidden','true'); }
-        else { content.style.display=''; content.setAttribute('aria-hidden','false'); }
+    const content = snippet.querySelector('.snippet-content');
+    let collapsed = snippet.classList.contains('collapsed');
+    function renderToggle(){
+      if(collapsed){
+        snippet.classList.add('collapsed');
+        if(content){ content.style.display='none'; content.setAttribute('aria-hidden','true'); }
+        toggle.setAttribute('aria-expanded','false');
+        toggle.textContent='Show Strategy Snapshot';
+        hint.textContent='(collapsed)';
+      } else {
+        snippet.classList.remove('collapsed');
+        if(content){ content.style.display=''; content.setAttribute('aria-hidden','false'); }
+        toggle.setAttribute('aria-expanded','true');
+        toggle.textContent='Hide Strategy Snapshot';
+        hint.textContent='(visible)';
       }
-      toggle.setAttribute('aria-expanded', (!collapsed).toString());
-      toggle.textContent = collapsed ? 'Show Strategy Snapshot' : 'Hide Strategy Snapshot';
-      hint.textContent = collapsed ? '(collapsed)' : '(visible)';
-    });
+    }
+    renderToggle();
+    function flip(){
+      collapsed = !collapsed;
+      renderToggle();
+    }
+    toggle.addEventListener('click', e=>{ e.preventDefault(); flip(); });
+    toggle.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); flip(); }});
   }
 })();
 // Hash change listener: when user clicks top nav anchors (#roadmap etc.), sync view and render immediately
@@ -1587,6 +1756,11 @@ window.addEventListener('hashchange', ()=>{
     document.querySelectorAll('.app-view').forEach(v=>{ v.hidden = (v.dataset.view !== 'roadmap'); });
     // Ensure roadmap view container is visible
     const rv = document.getElementById('view-roadmap'); if(rv) rv.hidden = false;
+    render();
+  } else if (h === 'personas') {
+    state.view = 'personas';
+    document.querySelectorAll('.app-view').forEach(v=>{ v.hidden = (v.dataset.view !== 'personas'); });
+    const pv = document.getElementById('view-personas'); if(pv) pv.hidden = false;
     render();
   }
 });
@@ -1616,6 +1790,8 @@ window.addEventListener('hashchange', ()=>{
   requestAnimationFrame(()=>{ compress(); });
   window.addEventListener('resize', ()=>{ chips.forEach(c=>{ c.style.fontSize=''; c.style.padding=''; }); requestAnimationFrame(()=>{ compress(); }); });
 })();
+// Personas carousel logic - delay execution to ensure DOM is ready
+// Carousel logic removed; personas now all visible in a responsive grid.
 /** Auto-fit cadence chips on a single line (shrink padding/font until they fit) */
 (function autoFitCadence(){
   const container = document.querySelector('.cadence-chips');
@@ -1655,149 +1831,7 @@ window.addEventListener('hashchange', ()=>{
   window.addEventListener('resize', ()=>{ clearTimeout(to); to=setTimeout(autoFitCadence,150); });
 })();
 
-// White Paper Audio Functionality
-let audioSynth = null;
-let isPlaying = false;
-let currentText = '';
-let currentPosition = 0;
-
-function initAudio() {
-  if (!('speechSynthesis' in window)) {
-    document.getElementById('audioStatus').textContent = 'Audio not supported in this browser';
-    return false;
-  }
-  return true;
-}
-
-function toggleAudio() {
-  if (!initAudio()) return;
-  
-  if (isPlaying) {
-    pauseAudio();
-  } else {
-    playAudio();
-  }
-}
-
-function playAudio() {
-  if (!initAudio()) return;
-  
-  const content = document.getElementById('whitepaperContent');
-  if (!content) return;
-  
-  // Extract text content for speech synthesis
-  currentText = content.innerText || content.textContent || '';
-  
-  if (audioSynth) {
-    speechSynthesis.cancel();
-  }
-  
-  audioSynth = new SpeechSynthesisUtterance(currentText);
-  audioSynth.rate = parseFloat(document.getElementById('speedControl').value);
-  audioSynth.volume = 0.8;
-  audioSynth.pitch = 1;
-  
-  // Use a more natural voice if available
-  const voices = speechSynthesis.getVoices();
-  const preferredVoice = voices.find(voice => 
-    voice.name.includes('Natural') || 
-    voice.name.includes('Enhanced') || 
-    voice.name.includes('Premium') ||
-    (voice.lang.startsWith('en') && voice.localService)
-  );
-  if (preferredVoice) {
-    audioSynth.voice = preferredVoice;
-  }
-  
-  audioSynth.onstart = function() {
-    isPlaying = true;
-    updatePlayButton();
-    document.getElementById('audioStatus').textContent = 'Playing...';
-    startProgressTracking();
-  };
-  
-  audioSynth.onend = function() {
-    isPlaying = false;
-    updatePlayButton();
-    document.getElementById('audioStatus').textContent = 'Finished';
-    document.getElementById('progressBar').style.width = '100%';
-  };
-  
-  audioSynth.onerror = function() {
-    isPlaying = false;
-    updatePlayButton();
-    document.getElementById('audioStatus').textContent = 'Audio error occurred';
-  };
-  
-  speechSynthesis.speak(audioSynth);
-}
-
-function pauseAudio() {
-  if (speechSynthesis.speaking) {
-    speechSynthesis.pause();
-    isPlaying = false;
-    updatePlayButton();
-    document.getElementById('audioStatus').textContent = 'Paused';
-  }
-}
-
-function stopAudio() {
-  if (speechSynthesis.speaking || speechSynthesis.pending) {
-    speechSynthesis.cancel();
-  }
-  isPlaying = false;
-  currentPosition = 0;
-  updatePlayButton();
-  document.getElementById('audioStatus').textContent = 'Stopped';
-  document.getElementById('progressBar').style.width = '0%';
-}
-
-function changeSpeed() {
-  if (audioSynth && speechSynthesis.speaking) {
-    const wasPlaying = isPlaying;
-    stopAudio();
-    if (wasPlaying) {
-      setTimeout(playAudio, 100);
-    }
-  }
-}
-
-function updatePlayButton() {
-  const playPauseIcon = document.getElementById('playPauseIcon');
-  const playPauseText = document.getElementById('playPauseText');
-  
-  if (isPlaying) {
-    playPauseIcon.textContent = '⏸️';
-    playPauseText.textContent = 'Pause Audio';
-  } else {
-    playPauseIcon.textContent = '▶️';
-    playPauseText.textContent = 'Play Audio';
-  }
-}
-
-function startProgressTracking() {
-  const progressBar = document.getElementById('progressBar');
-  const estimatedDuration = currentText.length * 0.08; // Rough estimate: ~0.08 seconds per character
-  let elapsed = 0;
-  
-  const progressInterval = setInterval(() => {
-    if (!isPlaying || !speechSynthesis.speaking) {
-      clearInterval(progressInterval);
-      return;
-    }
-    
-    elapsed += 0.1;
-    const progress = Math.min((elapsed / estimatedDuration) * 100, 95);
-    progressBar.style.width = progress + '%';
-  }, 100);
-}
-
-// Load voices when they become available
-if ('speechSynthesis' in window) {
-  speechSynthesis.onvoiceschanged = function() {
-    // Voices are now loaded
-  };
-}
+// (Removed speech synthesis audio code for whitepaper view - not needed.)
 
 // Remove problematic text from white paper
 document.addEventListener('DOMContentLoaded', function() {
@@ -1874,7 +1908,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Bottom Right Corner Logo -->
-<img src="SC_Diamond_Signatures.jpg" alt="Sam's Club Diamond Signatures Logo" class="corner-badge" aria-hidden="true" />
+<!-- Inline corner badge (vector) replacing external image file for full standalone portability -->
+<!-- Bottom-right corner badge removed per request -->
 
 </body>
 </html>
