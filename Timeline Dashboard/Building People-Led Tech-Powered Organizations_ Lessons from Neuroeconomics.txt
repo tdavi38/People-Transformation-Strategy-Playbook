@@ -1,0 +1,28 @@
+Building People-Led, Tech-Powered Organizations: Lessons from Neuroeconomics
+By Tolliver Davis
+Senior Manager, Sam’s Club People Strategy
+As organizations embrace artificial intelligence, most focus on efficiency and automation. At Sam’s Club, we are asking a different question: how can AI act with intentionality, helping people make better decisions, grow, and thrive?
+Our vision is not about automating tasks alone. We are building agentic AI: systems that take initiative, adapt to new information, and collaborate meaningfully with humans.
+To guide us, we are drawing on an unexpected discipline: neuroeconomics, the study of how people make decisions shaped by cognition, emotion, and motivation.
+At first glance, neuroeconomics and AI may seem far apart. Together, they provide a blueprint for designing intelligent systems that go beyond processing data and begin to understand people.
+From Automation to Agency
+Traditional automation is rule-based and reactive. It waits for a command, executes, and delivers. Agentic AI is fundamentally different. It can set goals, weigh tradeoffs, and respond to feedback. In short, it begins to mirror human agency.
+That evolution raises critical questions:
+* How do we ensure AI decisions align with human values?
+* How do we build trust in systems that think for themselves?
+* How do we design AI that elevates, rather than overwhelms, human capability?
+Neuroeconomics helps us answer. It offers the cognitive, emotional, and social architecture of decision-making. This framework allows us to build AI that is psychologically aware, emotionally intelligent, and behaviorally aligned.
+What This Looks Like at Sam’s Club
+We are embedding agentic AI into systems that support thousands of associates. These agents must do more than complete tasks. They must coach, advise, and evolve with the people they serve.
+* Merchandising: AI that recommends localized assortments by blending sales data, seasonality, shopper mood, and manager input.
+* Operations: AI that guides managers through labor planning with clear tradeoff options, instead of raw data overload.
+* Learning & Development: AI that nudges associates to invest in long-term skills, countering the natural pull of short-term convenience.
+Each of these examples reflects neuroeconomic truths about human behavior. Ignoring those truths leads to systems that frustrate users. Embracing them produces AI that becomes a trusted partner.
+Designing Responsibly
+People are social learners. We want to feel seen, supported, and empowered. Agentic AI must therefore act as social agents: systems that know when to explain, when to adapt, and when to defer.
+Responsible design requires transparency, fairness, and human oversight from the beginning. By anchoring our systems in the science of decision-making, we are not just keeping people involved. We are centering empathy, cognition, and collaboration in every design choice.
+The Bigger Picture
+This moment is about more than technology. It is about trust, transformation, and the kind of organization we choose to be.
+At Sam’s Club, our goal is bold and clear: use AI not to replace human decision-making, but to elevate it. By blending the science of how people behave with the technical power of AI, we are creating digital agents that empower people, not overpower them.
+Neuroeconomics provides a roadmap for the future. The best AI will not only be powerful; it will also be human-aware.
+
